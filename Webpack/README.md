@@ -16,10 +16,6 @@
 - All of your files should end with a new line
 - A README.md file at the root of the folder of the project is mandatory
 
-## Holberton Logo:
-![holby-logo](https://s3.eu-west-3.amazonaws.com/hbtn.intranet/uploads/medias/2019/11/175b85183ecedb529e14.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4MYA5JM5DUTZGMZG%2F20240429%2Feu-west-3%2Fs3%2Faws4_request&X-Amz-Date=20240429T132959Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=f6beb20e8eecde284476a7f7026b434f5a3509df20b92df170d560dbc11e5c4d)
-
-
 # Tasks
 
 ### 0. Basic Setup
