@@ -22,20 +22,4 @@ module.exports = {
       },
     ],
   },
-  optimization: {
-    minimizer: [
-      new ImageMinimizerPlugin ({
-        minimizer: {
-          implementation: ImageMinimizerPlugin.imageminMinify,
-          options: {
-            plugins: [
-              ['optipng', { optimizationLevel: 5 }],
-              ['jpegtran', { progressive: true }],
-              ['svgo', { removeViewBox: false }],
-            ],
-          },
-        },
-      }),
-    ],
-  },
 };
