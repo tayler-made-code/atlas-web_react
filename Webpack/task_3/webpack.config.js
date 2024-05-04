@@ -7,7 +7,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
   mode: 'development',
   entry: {
-    header: './modules/header/header_main.js',
+    header: './modules/header/header.js',
     body: './modules/body/body.js',
     footer: './modules/footer/footer.js',
   },
@@ -17,7 +17,7 @@ module.exports = {
   },
   devtool: 'inline-source-map',
   devserver: {
-    static: path.join(__dirname, 'public'),
+    static: path.join(__dirname, './public'),
     port: 8564,
     open: true,
   },
