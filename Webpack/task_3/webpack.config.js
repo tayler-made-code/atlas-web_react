@@ -5,14 +5,14 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   entry: {
-    header: './modules/header_main.js',
-    body: './modules/body.js',
-    footer: './modules/footer.js',
+    header: './modules/header/header_main.js',
+    body: './modules/body/body.js',
+    footer: './modules/footer/footer.js',
   },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'public'),
   },
   devtool: 'inline-source-map',
