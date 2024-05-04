@@ -1,0 +1,14 @@
+button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: #e0354b;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+#count {
+  font-weight: bold;
+  position: relative;
+  right: -150px;
+}
