@@ -1,4 +1,4 @@
-import {getFullYear, getFooterCopy, getLatestNotifications } from './utils';
+import {getFullYear, getFooterCopy, getLatestNotification } from './utils';
 
 describe('getFullYear', () => {
   it('should return the correct year', () => {
@@ -17,9 +17,9 @@ describe('getFooterCopy', () => {
   });
 });
 
-describe('getLatestNotifications', () => {
+describe('getLatestNotification', () => {
   it('should return the correct notification string', () => {
     const expectedNotification = '<strong>Urgent requirement</strong> - complete by EOD';
-    expect(getLatestNotifications()).toBe(expectedNotification)
+    expect(getLatestNotification()).toBe(expectedNotification)
   });
 });
