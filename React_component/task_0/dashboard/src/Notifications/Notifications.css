@@ -1,12 +1,16 @@
 .Notifications {
   padding: 1rem;
-  border: 0.15rem dashed red;
+  border: 0.15rem dashed #E0354B;
 }
 
-.Notifications li[data-priority = "default"] {
+.Notifications li[data-notification-type = "default"] {
   color: blue;
 }
 
-.Notifications li[data-priority = "urgent"] {
+.Notifications li[data-notification-type = "urgent"] {
   color: red;
+}
+
+.Notifications.hidden {
+  display: none;
 }
