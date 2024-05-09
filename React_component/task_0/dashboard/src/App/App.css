@@ -1,0 +1,35 @@
+hr {
+  border: 2px solid red;
+}
+
+.App-header {
+  display: flex;
+  align-items: center;
+}
+
+.App-header img {
+  height: 16rem;
+}
+
+.App-header h1 {
+  color: red;
+  font-style: bold;
+  font-size: 3rem;
+}
+
+.App-body {
+  height: 30rem;
+}
+
+.App-body p {
+  font-size: 1.5rem;
+  padding-top: 2rem;
+  padding-left: 2rem;
+}
+
+.App-footer p {
+  font-size: 1.5rem;
+  font-style: italic;
+  text-align: center;
+}
+
