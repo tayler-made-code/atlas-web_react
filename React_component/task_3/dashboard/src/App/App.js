@@ -7,6 +7,8 @@ import Login from '../Login/Login';
 import CourseList from '../CourseList/CourseList';
 import Notifications from '../Notifications/Notifications';
 import { getLatestNotification } from '../utils/utils';
+import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
+import BodySection from '../BodySection/BodySection';
 
 const listCourses = [
   { id: 1, name: 'ES6', credit: 60 },
@@ -50,7 +52,25 @@ class App extends React.Component {
           <Notifications displayDrawer={isLoggedIn} listNotifications={listNotifications} />
           <Header />
           <hr />
-          {isLoggedIn ? <CourseList listCourses={listCourses} /> : <Login />}
+          {isLoggedIn ? (
+            <BodySectionWithMarginBottom title="Course List">
+              <CourseList listCourses={listCourses} />
+            </BodySectionWithMarginBottom>
+          ) : (
+            <BodySectionWithMarginBottom title="Log in to continue">
+              <Login />
+            </BodySectionWithMarginBottom>
+          )}
+          <BodySection title="News from the School">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque et
+              tincidunt ligula, et pharetra nisl. Mauris suscipit, lectus sit amet
+              dictum efficitur, libero odio accumsan metus, ut sollicitudin odio
+              ligula sit amet ex. In sed nulla nec elit sollicitudin tincidunt.
+              Nullam dictum, elit et ultricies gravida, turpis enim iaculis ligula,
+              nec feugiat nunc mi ac dui. In hac habitasse platea dictumst.
+            </p>
+          </BodySection>
           <hr />
           <Footer />
         </div>
