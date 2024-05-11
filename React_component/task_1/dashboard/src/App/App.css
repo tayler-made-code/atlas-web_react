@@ -1,0 +1,11 @@
+hr {
+  border: 2px solid #E0354B;
+}
+
+.App.isLoggedOut {
+  /* Styles when isLoggedIn is false */
+}
+
+.App.isLoggedIn {
+  /* Styles when isLoggedIn is true */
+}
