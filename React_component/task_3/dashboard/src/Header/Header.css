@@ -1,0 +1,14 @@
+.Header {
+  display: flex;
+  align-items: center;
+}
+
+.Header img {
+  height: 16rem;
+}
+
+.Header h1 {
+  color: #E0354B;
+  font-style: bold;
+  font-size: 3rem;
+}
