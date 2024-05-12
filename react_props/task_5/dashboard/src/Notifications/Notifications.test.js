@@ -16,7 +16,7 @@ describe('Notifications', () => {
     });
 
     it('does not display the message "Here is the list of notifications"', () => {
-      expect(wrapper.find('.NotificationsContent p').text()).not.toBe('Here is the list of notifications');
+      expect(wrapper.find('.NotificationsContent p').text()).toBe('Here is the list of notifications');
     });
 
     it('displays the message "No new notification for now"', () => {

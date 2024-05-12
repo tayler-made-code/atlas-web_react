@@ -4,11 +4,20 @@ import CourseList from './CourseList';
 import CourseListRow from './CourseListRow';
 
 describe('CourseList', () => {
-  let wrapper;
+  it('renders CourseList component without crashing', () => {
+    shallow(<CourseList />);
+  });
+
+  it('renders the 3 different rows', () => {
+    const wrapper = shallow(<CourseList />);
+    expect(wrapper.find('CourseListRow')).toHaveLength(3);
+  });
 
   describe('With empty listCourses', () => {
+    let wrapper;
+
     beforeEach(() => {
-      wrapper = shallow(<CourseList />);
+      wrapper = shallow(<CourseList listCourses={[]} />);
     });
 
     it('renders correctly if listCourses is empty or not provided', () => {
@@ -16,7 +25,9 @@ describe('CourseList', () => {
     });
 
     it('displays the message "No course available yet"', () => {
-      expect(wrapper.find(CourseListRow).prop('textFirstCell')).toBe('No course available yet');
+      const wrapper = shallow(<CourseList />);
+      const courseListRows = wrapper.find(CourseListRow).last();
+      expect(courseListRows.prop('textFirstCell')).toBe('No course available yet');
     });
   });
 
@@ -26,6 +37,7 @@ describe('CourseList', () => {
       { id: 2, name: 'Webpack', credit: 20 },
       { id: 3, name: 'React', credit: 40 },
     ];
+    let wrapper;
 
     beforeEach(() => {
       wrapper = shallow(<CourseList listCourses={listCourses} />);
