@@ -14,7 +14,7 @@ function App({ isLoggedIn }) {
       <div className="App">
         <Header />
         <hr />
-        {isLoggedIn? <CourseList /> : <Login />}
+        {isLoggedIn ? <CourseList /> : <Login />}
         <hr />
         <Footer />
       </div>
@@ -24,6 +24,10 @@ function App({ isLoggedIn }) {
 
 App.propTypes = {
   isLoggedIn: PropTypes.bool
+};
+
+App.defaultProps = {
+  isLoggedIn: false
 };
 
 export default App;

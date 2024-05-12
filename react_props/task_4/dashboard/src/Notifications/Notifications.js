@@ -7,7 +7,6 @@ import NotificationItem from './NotificationItem';
 export function Notifications({ displayDrawer }) {
   const handleButtonClick = () => {
     console.log('Close button has been clicked');
-    // Additional logic to close the drawer or reset state
   };
 
   return (
@@ -17,16 +16,6 @@ export function Notifications({ displayDrawer }) {
       </div>
       {displayDrawer && (
         <div className="Notifications">
-          <div className="NotificationsContent">
-            <p>
-              Here is the list of notifications
-            </p>
-            <ul>
-              <NotificationItem type="default" value="New course available" />
-              <NotificationItem type="urgent" value="New resume available" />
-              <NotificationItem type="urgent" html={{ __html: getLatestNotification() }} />
-            </ul>
-          </div>
           <button
             style={{
               position: 'absolute',
@@ -39,6 +28,16 @@ export function Notifications({ displayDrawer }) {
             onClick={handleButtonClick}>
             x
           </button>
+          <div className="NotificationsContent">
+            <p>
+              Here is the list of notifications
+            </p>
+            <ul>
+              <NotificationItem type="default" value="New course available" />
+              <NotificationItem type="urgent" value="New resume available" />
+              <NotificationItem type="urgent" html={{ __html: getLatestNotification() }} />
+            </ul>
+          </div>
         </div>
       )}
     </>

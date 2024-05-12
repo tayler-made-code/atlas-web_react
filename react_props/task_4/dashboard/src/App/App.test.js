@@ -31,13 +31,13 @@ describe('App', () => {
   });
 
   describe('App when isLoggedIn is true', () => {
+    let wrapper;
+
     beforeEach(() => {
-      const wrapper = shallow(<App isLoggedIn={false} />);
-      wrapper.setProps({ isLoggedIn: true });
+      wrapper = shallow(<App isLoggedIn={true} />);
     });
     
     it('does not contain the Login component', () => {
-      const wrapper = shallow(<App isLoggedIn={true} />);
       expect(wrapper.find(Login)).toHaveLength(0);
     });
 
