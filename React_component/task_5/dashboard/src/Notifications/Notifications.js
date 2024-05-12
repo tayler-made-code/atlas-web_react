@@ -4,22 +4,32 @@ import './Notifications.css';
 import NotificationItem from './NotificationItem';
 import NotificationItemShape from './NotificationItemShape';
 
-class Notifications extends React.Component {
+export class Notifications extends React.Component {
   constructor(props) {
     super(props);
     this.markAsRead = this.markAsRead.bind(this);
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return (
+      nextProps.listNotifications.length > this.props.listNotifications.length
+    );
   }
 
   markAsRead(id) {
     console.log(`Notification ${id} has been marked as read`);
   }
 
-  handleButtonClick = () => {
+  handleButtonClick() {
     console.log('Close button has been clicked');
   }
 
   render() {
     const { displayDrawer, listNotifications } = this.props;
+    
+    const handleButtonClick = () => {
+      console.log('Close button has been clicked');
+    }
 
     return (
       <>
@@ -60,7 +70,7 @@ class Notifications extends React.Component {
         </div>
       )}
     </>
-    )
+    );
   }
 }
 

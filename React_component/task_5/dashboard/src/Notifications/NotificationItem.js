@@ -1,19 +1,21 @@
-import React from "react";
+import React, { memo } from "react";
 import PropTypes from "prop-types";
 
-class NotificationItem extends React.PureComponent {
-  render() {
-    const { type, value, html } = this.props;
+const NotificationItem = memo(({ type, value, html, markAsRead, id }) => {
+  const listItemContent = html ? (
+    <li
+      data-notification-type={type}
+      dangerouslySetInnerHTML={html}
+      onClick={() => markAsRead(id)}
+    />
+  ) : (
+    <li data-notification-type={type} onClick={() => markAsRead(id)}>
+      {value}
+    </li>
+  );
 
-    const listItemContent = html ? (
-      <li data-notification-type={type} dangerouslySetInnerHTML={html} />
-    ) : (
-      <li data-notification-type={type} onClick={this.handleClick}>{value}</li>
-    );
-
-    return listItemContent;
-  }
-}
+  return listItemContent;
+});
 
 NotificationItem.propTypes = {
   type: PropTypes.string,

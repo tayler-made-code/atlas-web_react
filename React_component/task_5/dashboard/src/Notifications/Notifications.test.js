@@ -53,5 +53,19 @@ describe('Notifications', () => {
       expect(consoleSpy).toHaveBeenCalledWith('Notification 1 has been marked as read');
       consoleSpy.mockRestore();
     });
+
+    it('does not rerender when the props are the same', () => {
+      const shouldRender = wrapper.instance().shouldComponentUpdate({ listNotifications });
+      expect(shouldRender).toBe(false);
+    });
+
+    it('rerenders when the listNofications prop has a longer list', () => {
+      const newListNotifications = [
+        ...listNotifications,
+        { id: 4, value: 'New notification', type: 'default' },
+      ];
+      const shouldRender = wrapper.instance().shouldComponentUpdate({ listNotifications: newListNotifications });
+      expect(shouldRender).toBe(true);
+    });
   });
 });
