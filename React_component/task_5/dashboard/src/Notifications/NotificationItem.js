@@ -1,7 +1,7 @@
-import React, { memo } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
-const NotificationItem = memo(({ type, value, html, markAsRead, id }) => {
+const NotificationItem = React.memo(function NotificationItem({ type = "default", value, html, markAsRead = () => {}, id=0 }) {
   const listItemContent = html ? (
     <li
       data-notification-type={type}
@@ -25,11 +25,6 @@ NotificationItem.propTypes = {
   }),
   markAsRead: PropTypes.func,
   id: PropTypes.number,
-};
-
-NotificationItem.defaultProps = {
-  type: 'default',
-  markAsRead: () => {},
 };
 
 export default NotificationItem;

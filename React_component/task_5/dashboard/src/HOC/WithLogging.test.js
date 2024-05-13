@@ -3,34 +3,31 @@ import { shallow, mount } from 'enzyme';
 import WithLogging from './WithLogging';
 import Login from '../Login/Login';
 
-describe('WithLogging HOC', () => {
-  let consoleSpy;
-
-  beforeEach(() => {
-    consoleSpy = jest.spyOn(console, 'log').mockImplementation();
-  });
+describe('WithLogging', () => {
+  let logMock;
+  const resetLogMock = () => {
+    logMock = jest.spyOn(console, 'log').mockImplementation(() => {});
+  };
 
   afterEach(() => {
-    consoleSpy.mockRestore();
+    jest.restoreAllMocks();
   });
 
-  it('should log when the wrapped element is pure HTML', () => {
-    const HtmlComponent = WithLogging(() => <p />);
-    const wrapper = mount(<HtmlComponent />);
-
-    expect(consoleSpy).toHaveBeenCalledWith('Component Component is mounted');
-
+  it('logs to console on mount and unmount with pure HTML element', () => {
+    resetLogMock();
+    const HTMLComponent = WithLogging(() => <p />);
+    const wrapper = mount(<HTMLComponent />);
+    expect(logMock).toHaveBeenCalledWith('Component Component is mounted');
     wrapper.unmount();
-    expect(consoleSpy).toHaveBeenCalledWith('Component Component is going to unmount');
+    expect(logMock).toHaveBeenCalledWith('Component Component is going to unmount');
   });
 
-  it('should log when the wrapped element is the Login component', () => {
-    const WrappedLogin = WithLogging(Login);
-    const wrapper = mount(<WrappedLogin />);
-
-    expect(consoleSpy).toHaveBeenCalledWith('Component Login is mounted');
-
+  it('logs to console on mount and unmount with Login component', () => {
+    resetLogMock();
+    const LoginWithLogging = WithLogging(Login);
+    const wrapper = mount(<LoginWithLogging />);
+    expect(logMock).toHaveBeenCalledWith('Component Login is mounted');
     wrapper.unmount();
-    expect(consoleSpy).toHaveBeenCalledWith('Component Login is going to unmount');
+    expect(logMock).toHaveBeenCalledWith('Component Login is going to unmount');
   });
 });
