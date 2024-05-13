@@ -23,18 +23,18 @@ const listNotifications = [
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.logOut = this.logOut.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
   componentDidMount() {
-    document.addEventListener('keydown', this.logOut);
+    document.addEventListener('keydown', this.handleKeyDown);
   }
 
   componentWillUnmount() {
-    document.removeEventListener('keydown', this.logOut);
+    document.removeEventListener('keydown', this.handleKeyDown);
   }
 
-  logOut(event) {
+  handleKeyDown = (event) => {
     if (event.ctrlKey && event.key === 'h') {
       alert('Logging you out');
       this.props.logOut();
@@ -46,8 +46,8 @@ class App extends React.Component {
 
     return (
       <React.Fragment>
+        <Notifications displayDrawer={isLoggedIn} listNotifications={listNotifications} />
         <div className="App">
-          <Notifications displayDrawer={isLoggedIn} listNotifications={listNotifications} />
           <Header />
           <hr />
           {isLoggedIn ? <CourseList listCourses={listCourses} /> : <Login />}
@@ -65,6 +65,7 @@ App.propTypes = {
 };
 
 App.defaultProps = {
+  isLoggedIn: false,
   logOut: () => {},
 };
 

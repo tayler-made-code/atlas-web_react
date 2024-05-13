@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import App from './App';
 import Login from '../Login/Login';
 import CourseList from '../CourseList/CourseList';
@@ -47,26 +47,18 @@ describe('App', () => {
     });
   });
 
-  describe('logOut functionality', () => {
-    let logOutMock;
-    let alertMock;
+  it('calls logOut and alert when control and h are pressed', () => {
+    const logOutMock = jest.fn();
+    const alertMock = jest.spyOn(window, 'alert').mockImplementation(() => {});
+    const wrapper = mount(<App logOut={logOutMock} />);
 
-    beforeEach(() => {
-      logOutMock = jest.fn();
-      alertMock = jest.spyOn(window, 'alert').mockImplementation();
-    });
+    const event = new KeyboardEvent('keydown', { key: 'h', ctrlKey: true });
+    document.dispatchEvent(event);
 
-    afterEach(() => {
-      alertMock.mockRestore();
-    });
+    expect(logOutMock).toHaveBeenCalled();
+    expect(alertMock).toHaveBeenCalledWith('Logging you out');
 
-    it('calls the logOut function and the alert when pressing ctrl + h', () => {
-      const wrapper = mount(<App logOut={logOutMock} />);
-      const event = new KeyboardEvent('keydown', { ctrlKey: true, key: 'h' });
-      document.dispatchEvent(event);
-      expect(logOutMock).toHaveBeenCalled();
-      expect(alertMock).toHaveBeenCalledWith('Logging you out');
-      wrapper.unmount();
-    });
+    alertMock.mockRestore();
+    wrapper.unmount();
   });
 });
