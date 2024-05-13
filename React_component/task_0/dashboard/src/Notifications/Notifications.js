@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Notifications.css';
+import { getLatestNotification } from '../utils/utils';
 import NotificationItem from './NotificationItem';
 import NotificationItemShape from './NotificationItemShape';
 
@@ -17,6 +18,18 @@ export function Notifications({ displayDrawer, listNotifications }) {
       </div>
       {displayDrawer && (
         <div className="Notifications">
+          <button
+            style={{
+              position: 'absolute',
+              right: '1rem',
+              border: 'none',
+              backgroundColor: 'transparent',
+              cursor: 'pointer',
+            }}
+            aria-label="Close"
+            onClick={handleButtonClick}>
+            x
+          </button>
           <div className="NotificationsContent">
             <p>Here is the list of notifications</p>
             <ul>
@@ -34,18 +47,6 @@ export function Notifications({ displayDrawer, listNotifications }) {
               )}
             </ul>
           </div>
-          <button
-            style={{
-              position: 'absolute',
-              right: '1rem',
-              border: 'none',
-              backgroundColor: 'transparent',
-              cursor: 'pointer',
-            }}
-            aria-label="Close"
-            onClick={handleButtonClick}>
-            x
-          </button>
         </div>
       )}
     </>

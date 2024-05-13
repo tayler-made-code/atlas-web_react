@@ -3,23 +3,26 @@ import { shallow } from 'enzyme';
 import CourseListRow from './CourseListRow';
 
 describe('CourseListRow', () => {
-  it('renders one cell with colspan = 2 when textSecondCell does not exist', () => {
-    const wrapper = shallow(<CourseListRow isHeader={true} textFirstCell="Header" />);
-    expect(wrapper.find('th').prop('colSpan')).toBe('2');
-    expect(wrapper.find('th').text()).toBe('Header');
+  it('renders one cell with colspan = 2 when textSecondCell does not exist and isHeader is True', () => {
+    const wrapper = shallow(<CourseListRow isHeader={true} textFirstCell="Available Courses" />);
+    expect(wrapper.find('th').prop('colSpan')).toEqual("2");
+    expect(wrapper.find('th').text()).toEqual('Available Courses');
   });
 
-  it('renders two cells when textSecondCell is present', () => {
-    const wrapper = shallow(<CourseListRow isHeader={true} textFirstCell="Header" textSecondCell="Subheader" />);
-    expect(wrapper.find('th')).toHaveLength(2);
-    expect(wrapper.find('th').first().text()).toBe('Header');
-    expect(wrapper.find('th').last().text()).toBe('Subheader');
+  it('renders two cells when textSecondCell is present and isHeader is True', () => {
+    const wrapper = shallow(<CourseListRow isHeader={true} textFirstCell="Course Name" textSecondCell="Credit" />);
+    const cells = wrapper.find('th');
+    expect(cells.length).toEqual(2);
+    expect(cells.at(0).text()).toEqual('Course Name');
+    expect(cells.at(1).text()).toEqual('Credit');
   });
 
-  it('renders correctly two td elements within a tr element', () => {
-    const wrapper = shallow(<CourseListRow textFirstCell="Course" textSecondCell="Credit" />);
+  it('renders correctly two td elements within a tr element when isHeader is False', () => {
+    const wrapper = shallow(<CourseListRow isHeader={false} textFirstCell="ES6" textSecondCell="60" />);
+    const cells = wrapper.find('td');
+    expect(cells.length).toEqual(2);
+    expect(cells.at(0).text()).toEqual('ES6');
+    expect(cells.at(1).text()).toEqual('60');
     expect(wrapper.find('tr').children()).toHaveLength(2);
-    expect(wrapper.find('td').first().text()).toBe('Course');
-    expect(wrapper.find('td').last().text()).toBe('Credit');
   });
 });

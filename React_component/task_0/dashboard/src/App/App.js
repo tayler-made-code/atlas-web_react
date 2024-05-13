@@ -21,13 +21,17 @@ const listNotifications = [
 ];
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     const { isLoggedIn } = this.props;
 
     return (
       <React.Fragment>
+        <Notifications displayDrawer={isLoggedIn} listNotifications={listNotifications} />
         <div className="App">
-          <Notifications displayDrawer={isLoggedIn} listNotifications={listNotifications} />
           <Header />
           <hr />
           {isLoggedIn ? <CourseList listCourses={listCourses} /> : <Login />}
@@ -41,6 +45,10 @@ class App extends React.Component {
 
 App.propTypes = {
   isLoggedIn: PropTypes.bool
+};
+
+App.defaultProps = {
+  isLoggedIn: false
 };
 
 export default App;
