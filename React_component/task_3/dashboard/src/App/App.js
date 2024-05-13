@@ -25,18 +25,18 @@ const listNotifications = [
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.logOut = this.logOut.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
   componentDidMount() {
-    document.addEventListener('keydown', this.logOut);
+    document.addEventListener('keydown', this.handleKeyDown);
   }
 
   componentWillUnmount() {
-    document.removeEventListener('keydown', this.logOut);
+    document.removeEventListener('keydown', this.handleKeyDown);
   }
 
-  logOut(event) {
+  handleKeyDown = (event) => {
     if (event.ctrlKey && event.key === 'h') {
       alert('Logging you out');
       this.props.logOut();
@@ -48,12 +48,12 @@ class App extends React.Component {
 
     return (
       <React.Fragment>
+        <Notifications displayDrawer={isLoggedIn} listNotifications={listNotifications} />
         <div className="App">
-          <Notifications displayDrawer={isLoggedIn} listNotifications={listNotifications} />
           <Header />
           <hr />
           {isLoggedIn ? (
-            <BodySectionWithMarginBottom title="Course List">
+            <BodySectionWithMarginBottom title="Course list">
               <CourseList listCourses={listCourses} />
             </BodySectionWithMarginBottom>
           ) : (
@@ -63,12 +63,8 @@ class App extends React.Component {
           )}
           <BodySection title="News from the School">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque et
-              tincidunt ligula, et pharetra nisl. Mauris suscipit, lectus sit amet
-              dictum efficitur, libero odio accumsan metus, ut sollicitudin odio
-              ligula sit amet ex. In sed nulla nec elit sollicitudin tincidunt.
-              Nullam dictum, elit et ultricies gravida, turpis enim iaculis ligula,
-              nec feugiat nunc mi ac dui. In hac habitasse platea dictumst.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod urna vel nunc
+              pharetra, ac fringilla tellus faucibus.
             </p>
           </BodySection>
           <hr />
@@ -85,6 +81,7 @@ App.propTypes = {
 };
 
 App.defaultProps = {
+  isLoggedIn: false,
   logOut: () => {},
 };
 

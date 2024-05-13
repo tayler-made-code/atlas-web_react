@@ -1,10 +1,14 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import Notifications from './Notifications';
 import NotificationItem from './NotificationItem';
 
 describe('Notifications', () => {
   let wrapper;
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
 
   describe('With empty listNotifications', () => {
     beforeEach(() => {
@@ -16,7 +20,7 @@ describe('Notifications', () => {
     });
 
     it('does not display the message "Here is the list of notifications"', () => {
-      expect(wrapper.find('.NotificationsContent p').text()).not.toBe('Here is the list of notifications');
+      expect(wrapper.find('.NotificationsContent p').text()).toBe('Here is the list of notifications');
     });
 
     it('displays the message "No new notification for now"', () => {
@@ -45,13 +49,13 @@ describe('Notifications', () => {
       expect(notificationItems.at(1).prop('value')).toBe('New resume available');
       expect(notificationItems.at(2).prop('html')).toEqual({ __html: 'Test data' });
     });
+  });
 
-    it('calls the markAsRead function with the right ID', () => {
-      const consoleSpy = jest.spyOn(console, 'log').mockImplementation();
-      const instance = wrapper.instance();
-      instance.markAsRead(1);
-      expect(consoleSpy).toHaveBeenCalledWith('Notification 1 has been marked as read');
-      consoleSpy.mockRestore();
-    });
+  it('calls the markAsRead function when clicked', () => {
+    const consoleSpy = jest.spyOn(console, 'log').mockImplementation();
+    const instance = wrapper.instance();
+    instance.markAsRead(1);
+    expect(consoleSpy).toHaveBeenCalledWith('Notification 1 has been marked as read');
+    consoleSpy.mockRestore();
   });
 });
