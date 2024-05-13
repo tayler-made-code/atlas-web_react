@@ -28,8 +28,9 @@ NotificationItem.propTypes = {
 };
 
 NotificationItem.defaultProps = {
-  type: 'default',
+  type: "default",
   markAsRead: () => {},
+  id: 0,
 };
 
 export default NotificationItem;
