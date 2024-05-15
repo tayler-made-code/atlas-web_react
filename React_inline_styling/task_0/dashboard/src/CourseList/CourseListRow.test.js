@@ -25,4 +25,15 @@ describe('CourseListRow', () => {
     expect(cells.at(1).text()).toEqual('60');
     expect(wrapper.find('tr').children()).toHaveLength(2);
   });
+
+  it('renders correctly the background color when isHeader is True', () => {
+    const wrapper = shallow(<CourseListRow isHeader={true} textFirstCell="Available Courses" />);
+    expect(wrapper.find('th').prop('style')).toHaveProperty('backgroundColor', '#deb5b545');
+  });
+
+  it('renders correctly the background color when isHeader is False', () => {
+    const wrapper = shallow(<CourseListRow isHeader={false} textFirstCell="ES6" textSecondCell="60" />);
+    expect(wrapper.find('td').first().prop('style')).toHaveProperty('backgroundColor', '#f5f5f5ab');
+    expect(wrapper.find('td').last().prop('style')).toHaveProperty('backgroundColor', '#f5f5f5ab');
+  });
 });
