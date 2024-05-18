@@ -32,6 +32,7 @@
     "webpack-dev-server": "^5.0.4"
   },
   "dependencies": {
+    "aphrodite": "^2.4.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
@@ -39,6 +40,9 @@
     "testEnvironment": "jsdom",
     "setupFilesAfterEnv": [
       "<rootDir>/config/setupTests.js"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!(aphrodite))"
     ],
     "moduleNameMapper": {
       "\\.(css|less|scss|sss|styl)$": "<rootDir>/styleMock.js",

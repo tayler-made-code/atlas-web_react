@@ -1,8 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './Notifications.css';
+import { css, StyleSheet } from 'aphrodite';
 import NotificationItem from './NotificationItem';
 import NotificationItemShape from './NotificationItemShape';
+
+const styles = StyleSheet.create({
+  notifications: {
+    padding: '1rem',
+    border: '2px dashed #e0354b',
+  },
+  defaultNotification: {
+    color: '#0000ff',
+  },
+  urgentNotification: {
+    color: '#ff0000',
+  },
+  hidden: {
+    display: 'none',
+  },
+});
 
 class Notifications extends React.Component {
   constructor(props) {
@@ -33,7 +49,7 @@ class Notifications extends React.Component {
           <p>Your notifications</p>
         </div>
         {displayDrawer && (
-          <div className="Notifications">
+          <div className={css(styles.notifications)}>
             <button
               style={{
                 position: 'absolute',
@@ -63,6 +79,7 @@ class Notifications extends React.Component {
                       value={notification.value}
                       html={notification.html}
                       markAsRead={this.markAsRead}
+                      className={css(notification.type === 'default' ? styles.defaultNotification : styles.urgentNotification)}
                     />
                   ))
                 )}

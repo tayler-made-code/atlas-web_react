@@ -3,6 +3,9 @@ import { shallow, mount } from 'enzyme';
 import App from './App';
 import Login from '../Login/Login';
 import CourseList from '../CourseList/CourseList';
+import { StyleSheetTestUtils } from 'aphrodite';
+
+StyleSheetTestUtils.suppressStyleInjection();
 
 describe('App', () => {
   it('contains the Notifications component', () => {

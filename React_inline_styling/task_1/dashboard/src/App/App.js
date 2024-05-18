@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './App.css';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
@@ -9,6 +8,7 @@ import Notifications from '../Notifications/Notifications';
 import { getLatestNotification } from '../utils/utils';
 import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
 import BodySection from '../BodySection/BodySection';
+import { css, StyleSheet } from 'aphrodite';
 
 const listCourses = [
   { id: 1, name: 'ES6', credit: 60 },
@@ -21,6 +21,12 @@ const listNotifications = [
   { id: 2, value: 'New resume available', type: 'urgent' },
   { id: 3, html: { __html: getLatestNotification() }, type: 'urgent' },
 ];
+
+const styles = StyleSheet.create({
+  hr: {
+    border: '2px solid #E0354B',
+  },
+});
 
 class App extends React.Component {
   constructor(props) {
@@ -49,9 +55,9 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <Notifications displayDrawer={isLoggedIn} listNotifications={listNotifications} />
-        <div className="App">
+        <div>
           <Header />
-          <hr />
+          <hr className={css(styles.hr)} />
           {isLoggedIn ? (
             <BodySectionWithMarginBottom title="Course list">
               <CourseList listCourses={listCourses} />
@@ -67,7 +73,7 @@ class App extends React.Component {
               pharetra, ac fringilla tellus faucibus.
             </p>
           </BodySection>
-          <hr />
+          <hr className={css(styles.hr)} />
           <Footer />
         </div>
       </React.Fragment>
