@@ -26,6 +26,9 @@ const styles = StyleSheet.create({
   hr: {
     border: '2px solid #E0354B',
   },
+  body: {
+    textAlign: 'center',
+  },
   footer: {
     fontWeight: 'bold',
     fontSize: '1.2rem',
@@ -64,15 +67,15 @@ class App extends React.Component {
           <Header />
           <hr className={css(styles.hr)} />
           {isLoggedIn ? (
-            <BodySectionWithMarginBottom title="Course list">
+            <BodySectionWithMarginBottom className={css(styles.body)} title="Course list">
               <CourseList listCourses={listCourses} />
             </BodySectionWithMarginBottom>
           ) : (
-            <BodySectionWithMarginBottom title="Log in to continue">
+            <BodySectionWithMarginBottom className={css(styles.body)} title="Log in to continue">
               <Login />
             </BodySectionWithMarginBottom>
           )}
-          <BodySection title="News from the School">
+          <BodySection className={css(styles.body)} title="News from the School">
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod urna vel nunc
               pharetra, ac fringilla tellus faucibus.
