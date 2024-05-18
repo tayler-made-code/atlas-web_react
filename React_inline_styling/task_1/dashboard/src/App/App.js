@@ -79,7 +79,7 @@ class App extends React.Component {
             </p>
           </BodySection>
           <hr className={css(styles.hr)} />
-          <Footer />
+          <Footer className={css(styles.footer)} />
         </div>
       </React.Fragment>
     );
