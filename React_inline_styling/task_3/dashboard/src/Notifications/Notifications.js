@@ -8,6 +8,23 @@ const styles = StyleSheet.create({
   notifications: {
     padding: '1rem',
     border: '2px dashed #e0354b',
+    '@media (max-width: 900px)': {
+      border: 'none',
+      position: 'absolute',
+      top: '0',
+      left: '0',
+      right: '0',
+      bottom: '0',
+      padding: '0',
+      fontSize: '20px',
+      backgroundColor: 'white',
+      margin: '0',
+    },
+  },
+  unorderedNotifications: {
+    '@media (max-width: 900px)': {
+      padding: '0',
+    },
   },
   defaultNotification: {
     color: '#0000ff',
@@ -65,7 +82,7 @@ class Notifications extends React.Component {
             </button>
             <div className="NotificationsContent">
               <p>Here is the list of notifications</p>
-              <ul>
+              <ul className={css(styles.unorderedNotifications)}>
                 {listNotifications.length === 0 ? (
                   <NotificationItem
                     type="default"
