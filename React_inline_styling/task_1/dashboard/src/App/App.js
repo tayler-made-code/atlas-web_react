@@ -26,6 +26,11 @@ const styles = StyleSheet.create({
   hr: {
     border: '2px solid #E0354B',
   },
+  footer: {
+    fontWeight: 'bold',
+    fontSize: '1.2rem',
+    marginBottom: '1rem',
+  },
 });
 
 class App extends React.Component {
