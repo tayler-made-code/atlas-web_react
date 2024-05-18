@@ -1,6 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import CourseListRow from './CourseListRow';
+import { StyleSheetTestUtils } from 'aphrodite';
+
+StyleSheetTestUtils.suppressStyleInjection();
 
 describe('CourseListRow', () => {
   it('renders one cell with colspan = 2 when textSecondCell does not exist and isHeader is True', () => {
@@ -27,13 +30,18 @@ describe('CourseListRow', () => {
   });
 
   it('renders correctly the background color when isHeader is True', () => {
-    const wrapper = shallow(<CourseListRow isHeader={true} textFirstCell="Available Courses" />);
-    expect(wrapper.find('th').prop('style')).toHaveProperty('backgroundColor', '#deb5b545');
+    const wrapper = shallow(<CourseListRow isHeader={true} textFirstCell="Available Courses" textSecondCell="Credit" />);
+    const thElement = wrapper.find('th');
+    expect(thElement.first().prop('className')).toContain('headerCell');
+    const trElement = wrapper.find('tr');
+    expect(trElement.prop('className')).toContain('headerRow');
   });
 
   it('renders correctly the background color when isHeader is False', () => {
     const wrapper = shallow(<CourseListRow isHeader={false} textFirstCell="ES6" textSecondCell="60" />);
-    expect(wrapper.find('td').first().prop('style')).toHaveProperty('backgroundColor', '#f5f5f5ab');
-    expect(wrapper.find('td').last().prop('style')).toHaveProperty('backgroundColor', '#f5f5f5ab');
+    const tdElements = wrapper.find('td');
+    expect(tdElements.first().prop('className')).toContain('defaultCell');
+    const trElement = wrapper.find('tr');
+    expect(trElement.prop('className')).toContain('defaultRow');
   });
 });
