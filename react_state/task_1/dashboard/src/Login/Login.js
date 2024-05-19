@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
 
 function Login() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  cosnt [email, setEmail] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLoginSubmit = (e) => {
