@@ -65,16 +65,18 @@ describe('App', () => {
     wrapper.unmount();
   });
 
+  it('has a default state for displayDrawer of false', () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper.state().displayDrawer).toBe(false);
+  });
+
   it('sets the displayDrawer state correctly', () => {
     const wrapper = shallow(<App />);
-    const instance = wrapper.instance();
 
-    expect(wrapper.state().displayDrawer).toBe(false);
-
-    instance.handleDisplayDrawer();
+    wrapper.instance().handleDisplayDrawer();
     expect(wrapper.state().displayDrawer).toBe(true);
 
-    instance.handleHideDrawer();
+    wrapper.instance().handleHideDrawer();
     expect(wrapper.state().displayDrawer).toBe(false);
   });
 });
