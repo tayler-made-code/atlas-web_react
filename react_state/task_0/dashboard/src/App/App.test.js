@@ -64,4 +64,17 @@ describe('App', () => {
     alertMock.mockRestore();
     wrapper.unmount();
   });
+
+  it('sets the displayDrawer state correctly', () => {
+    const wrapper = shallow(<App />);
+    const instance = wrapper.instance();
+
+    expect(wrapper.state().displayDrawer).toBe(false);
+
+    instance.handleDisplayDrawer();
+    expect(wrapper.state().displayDrawer).toBe(true);
+
+    instance.handleHideDrawer();
+    expect(wrapper.state().displayDrawer).toBe(false);
+  });
 });

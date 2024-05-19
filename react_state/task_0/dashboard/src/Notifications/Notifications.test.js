@@ -73,7 +73,7 @@ describe('Notifications', () => {
       ];
   
       wrapper = mount(<Notifications displayDrawer={true} listNotifications={listNotifications} />);
-      const shouldUpdate = wrapper.instance().shouldComponentUpdate({ listNotifications });
+      const shouldUpdate = wrapper.instance().shouldComponentUpdate({ listNotifications, displayDrawer: true});
       expect(shouldUpdate).toBe(false);
     });
   
@@ -92,5 +92,35 @@ describe('Notifications', () => {
       const shouldUpdate = wrapper.instance().shouldComponentUpdate({ listNotifications: newListNotifications });
       expect(shouldUpdate).toBe(true);
     });
+  });
+
+  it('calls handleDisplayDrawer when clicking on the menuItem', () => {
+    const handleDisplayDrawerMock = jest.fn();
+    wrapper = shallow(
+      <Notifications
+        displayDrawer={false}
+        handleDisplayDrawer={handleDisplayDrawerMock}
+        handleHideDrawer={jest.fn()}
+        listNotifications={[]} 
+      />
+    );
+
+    wrapper.find('#menuItem').simulate('click');
+    expect(handleDisplayDrawerMock).toHaveBeenCalled();
+  });
+
+  it('calls handleHideDrawer when clicking on the close button', () => {
+    const handleHideDrawerMock = jest.fn();
+    wrapper = shallow(
+      <Notifications
+        displayDrawer={true}
+        handleDisplayDrawer={jest.fn()}
+        handleHideDrawer={handleHideDrawerMock}
+        listNotifications={[]} 
+      />
+    );
+
+    wrapper.find('button').simulate('click');
+    expect(handleHideDrawerMock).toHaveBeenCalled();
   });
 });

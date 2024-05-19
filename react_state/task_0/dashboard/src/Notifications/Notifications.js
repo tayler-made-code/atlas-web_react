@@ -79,18 +79,21 @@ class Notifications extends React.Component {
   };
 
   shouldComponentUpdate(nextProps) {
-    const { listNotifications } = this.props;
-    return nextProps.listNotifications.length > listNotifications.length;
+    const { listNotifications, displayDrawer } = this.props;
+    return (
+      nextProps.listNotifications.length > listNotifications.length ||
+      nextProps.displayDrawer !== displayDrawer
+    );
   }
 
   render() {
-    const { displayDrawer, listNotifications } = this.props;
+    const { displayDrawer, listNotifications, handleDisplayDrawer, handleHideDrawer } = this.props;
 
     const menuItemDisplay = displayDrawer ? css(styles.hiddenMenuItem) : css(styles.menuItem);
 
     return (
       <>
-        <div className={menuItemDisplay}>
+        <div className={menuItemDisplay} onClick={handleDisplayDrawer} id="menuItem">
           <p>Your notifications</p>
         </div>
         {displayDrawer && (
@@ -104,7 +107,7 @@ class Notifications extends React.Component {
                 cursor: 'pointer',
               }}
               aria-label="Close"
-              onClick={this.handleButtonClick}
+              onClick={handleHideDrawer}
             >
               x
             </button>
@@ -140,11 +143,15 @@ class Notifications extends React.Component {
 Notifications.propTypes = {
   displayDrawer: PropTypes.bool,
   listNotifications: PropTypes.arrayOf(NotificationItemShape),
+  handleDisplayDrawer: PropTypes.func,
+  handleHideDrawer: PropTypes.func,
 };
 
 Notifications.defaultProps = {
   displayDrawer: false,
   listNotifications: [],
+  handleDisplayDrawer: () => {},
+  handleHideDrawer: () => {},
 };
 
 export default Notifications;
