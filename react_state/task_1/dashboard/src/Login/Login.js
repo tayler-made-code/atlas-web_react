@@ -39,11 +39,21 @@ const styles = StyleSheet.create({
 
 function Login() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  cosnt [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     setIsLoggedIn(true);
   };
+
+  const handleChangeEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleChangePassword = (e) => {
+    setPassword(e.target.value);
+  }
 
   return (
     <Fragment>
@@ -51,9 +61,23 @@ function Login() {
         <p className={css(styles.loginP)}>Login to access the full dashboard</p>
         <form onSubmit={handleLoginSubmit}>
           <label htmlFor="email">Email</label>
-          <input className={css(styles.input)} type="email" id="email" name="email"></input>
+          <input
+            className={css(styles.input)}
+            type="email"
+            id="email"
+            name="email"
+            value={email}
+            onChange={handleChangeEmail}
+          />
           <label htmlFor="password">Password</label>
-          <input className={css(styles.input)} type="password" id="password" name="password"></input>
+          <input
+            className={css(styles.input)}
+            type="password"
+            id="password"
+            name="password"
+            value={password}
+            onChange={handleChangePassword}
+          />
           <input className={css(styles.button)} type="submit" value="OK" />
         </form>
       </div>
