@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { css, StyleSheet } from 'aphrodite';
 
 const styles = StyleSheet.create({
@@ -38,15 +38,24 @@ const styles = StyleSheet.create({
 });
 
 function Login() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLoginSubmit = (e) => {
+    e.preventDefault();
+    setIsLoggedIn(true);
+  };
+
   return (
     <Fragment>
       <div className={css(styles.login)}>
         <p className={css(styles.loginP)}>Login to access the full dashboard</p>
-        <label htmlFor="email">Email</label>
-        <input className={css(styles.input)} type="email" id="email" name="email"></input>
-        <label htmlFor="password">Password</label>
-        <input className={css(styles.input)} type="password" id="password" name="password"></input>
-        <button className={css(styles.button)}>OK</button>
+        <form onSubmit={handleLoginSubmit}>
+          <label htmlFor="email">Email</label>
+          <input className={css(styles.input)} type="email" id="email" name="email"></input>
+          <label htmlFor="password">Password</label>
+          <input className={css(styles.input)} type="password" id="password" name="password"></input>
+          <input className={css(styles.button)} type="submit" value="OK" />
+        </form>
       </div>
     </Fragment>
   );
