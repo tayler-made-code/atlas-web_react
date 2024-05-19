@@ -41,6 +41,7 @@ function Login() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [enableSubmit, setEnableSubmit] = useState(false);
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
@@ -49,10 +50,12 @@ function Login() {
 
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
+    setEnableSubmit(e.target.value.trim() !== '' && password.trim() !== '');
   };
 
   const handleChangePassword = (e) => {
     setPassword(e.target.value);
+    setEnableSubmit(e.target.value.trim() !== '' && email.trim() !== '');
   }
 
   return (
@@ -78,7 +81,12 @@ function Login() {
             value={password}
             onChange={handleChangePassword}
           />
-          <input className={css(styles.button)} type="submit" value="OK" />
+          <input
+            className={css(styles.button)}
+            type="submit"
+            value="OK"
+            disabled={!enableSubmit}
+          />
         </form>
       </div>
     </Fragment>

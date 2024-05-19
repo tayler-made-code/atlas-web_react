@@ -10,9 +10,9 @@ describe ('Login Component', () => {
     shallow(<Login />);
   });
 
-  it('renders 2 input and 2 label tags', () => {
+  it('renders 3 input and 2 label tags', () => {
     const wrapper = shallow(<Login />);
-    expect(wrapper.find('input')).toHaveLength(2);
+    expect(wrapper.find('input')).toHaveLength(3);
     expect(wrapper.find('label')).toHaveLength(2);
   });
 });
