@@ -48,6 +48,8 @@ class App extends React.Component {
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
     this.handleHideDrawer = this.handleHideDrawer.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.logIn = this.logIn.bind(this);
+    this.logOut = this.logOut.bind(this);
   }
 
   handleDisplayDrawer() {
@@ -73,9 +75,24 @@ class App extends React.Component {
     }
   }
 
+  logIn(email, password) {
+    this.setState({
+      user: {
+        email,
+        password,
+        isLoggedIn: true,
+      },
+    });
+  }
+
+  logOut() {
+    this.setState({
+      user: defaultUser,
+    });
+  }
+
   render() {
-    const { isLoggedIn } = this.props;
-    const { displayDrawer } = this.state;
+    const { user, logOut, displayDrawer } = this.state;
 
     return (
       <React.Fragment>
@@ -88,13 +105,13 @@ class App extends React.Component {
         <div>
           <Header />
           <hr className={css(styles.hr)} />
-          {isLoggedIn ? (
+          {user.isLoggedIn ? (
             <BodySectionWithMarginBottom className={css(styles.body)} title="Course list">
               <CourseList listCourses={listCourses} />
             </BodySectionWithMarginBottom>
           ) : (
             <BodySectionWithMarginBottom className={css(styles.body)} title="Log in to continue">
-              <Login />
+              <Login logIn={this.logIn} />
             </BodySectionWithMarginBottom>
           )}
           <BodySection className={css(styles.body)} title="News from the School">
