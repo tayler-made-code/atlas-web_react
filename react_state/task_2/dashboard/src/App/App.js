@@ -95,35 +95,37 @@ class App extends React.Component {
     const { user, logOut, displayDrawer } = this.state;
 
     return (
-      <React.Fragment>
-        <Notifications
-          displayDrawer={displayDrawer}
-          handleDisplayDrawer={this.handleDisplayDrawer}
-          handleHideDrawer={this.handleHideDrawer}
-          listNotifications={listNotifications}
-        />
-        <div>
-          <Header />
-          <hr className={css(styles.hr)} />
-          {user.isLoggedIn ? (
-            <BodySectionWithMarginBottom className={css(styles.body)} title="Course list">
-              <CourseList listCourses={listCourses} />
-            </BodySectionWithMarginBottom>
-          ) : (
-            <BodySectionWithMarginBottom className={css(styles.body)} title="Log in to continue">
-              <Login logIn={this.logIn} />
-            </BodySectionWithMarginBottom>
-          )}
-          <BodySection className={css(styles.body)} title="News from the School">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod urna vel nunc
-              pharetra, ac fringilla tellus faucibus.
-            </p>
-          </BodySection>
-          <hr className={css(styles.hr)} />
-          <Footer className={css(styles.footer)} />
-        </div>
-      </React.Fragment>
+      <AppContext.Provider value={{ user, logOut }}>
+        <React.Fragment>
+          <Notifications
+            displayDrawer={displayDrawer}
+            handleDisplayDrawer={this.handleDisplayDrawer}
+            handleHideDrawer={this.handleHideDrawer}
+            listNotifications={listNotifications}
+          />
+          <div>
+            <Header />
+            <hr className={css(styles.hr)} />
+            {user.isLoggedIn ? (
+              <BodySectionWithMarginBottom className={css(styles.body)} title="Course list">
+                <CourseList listCourses={listCourses} />
+              </BodySectionWithMarginBottom>
+            ) : (
+              <BodySectionWithMarginBottom className={css(styles.body)} title="Log in to continue">
+                <Login logIn={this.logIn} />
+              </BodySectionWithMarginBottom>
+            )}
+            <BodySection className={css(styles.body)} title="News from the School">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod urna vel nunc
+                pharetra, ac fringilla tellus faucibus.
+              </p>
+            </BodySection>
+            <hr className={css(styles.hr)} />
+            <Footer className={css(styles.footer)} />
+          </div>
+        </React.Fragment>
+      </AppContext.Provider>
     );
   }
 }

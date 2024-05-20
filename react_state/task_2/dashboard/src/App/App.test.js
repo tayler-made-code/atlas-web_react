@@ -34,18 +34,17 @@ describe('App', () => {
   });
 
   describe('App when isLoggedIn is true', () => {
+    let wrapper;
     beforeEach(() => {
-      const wrapper = shallow(<App isLoggedIn={false} />);
-      wrapper.setProps({ isLoggedIn: true });
+      wrapper = shallow(<App />);
+      wrapper.setState({ user: { isLoggedIn: true } });
     });
     
     it('does not contain the Login component', () => {
-      const wrapper = shallow(<App isLoggedIn={true} />);
       expect(wrapper.find(Login)).toHaveLength(0);
     });
 
     it('contains the CourseList component', () => {
-      const wrapper = shallow(<App isLoggedIn={true} />);
       expect(wrapper.find(CourseList)).toHaveLength(1);
     });
   });
@@ -78,5 +77,28 @@ describe('App', () => {
 
     wrapper.instance().handleHideDrawer();
     expect(wrapper.state().displayDrawer).toBe(false);
+  });
+
+  it('updates the state correctly when logIn is called', () => {
+    const wrapper = shallow(<App />);
+    const email = 'test@email.com';
+    const password = 'testpassword';
+    wrapper.instance().logIn(email, password);
+    expect(wrapper.state().user).toEqual({
+      email,
+      password,
+      isLoggedIn: true,
+    });
+  });
+
+  it('updates the state correctly when logOut is called', () => {
+    const wrapper = shallow(<App />);
+    wrapper.setState({ user: { isLoggedIn: true } });
+    wrapper.instance().logOut();
+    expect(wrapper.state().user).toEqual({
+      email: '',
+      password: '',
+      isLoggedIn: false,
+    });
   });
 });
