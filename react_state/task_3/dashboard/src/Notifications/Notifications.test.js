@@ -55,45 +55,6 @@ describe('Notifications', () => {
     });
   });
 
-  it('calls the markAsRead function when clicked', () => {
-    const consoleSpy = jest.spyOn(console, 'log').mockImplementation();
-    const listNotifications = [];
-    wrapper = shallow(<Notifications displayDrawer={true} listNotifications={listNotifications} />);
-    const instance = wrapper.instance();
-    instance.markAsRead(1);
-    expect(consoleSpy).toHaveBeenCalledWith('Notification 1 has been marked as read');
-    consoleSpy.mockRestore();
-  });
-
-  describe('shouldComponentUpdate', () => {
-    it('should not rerender with the same list of notifications', () => {
-      const listNotifications = [
-        { id: 1, value: 'New course available', type: 'default' },
-        { id: 2, value: 'New resume available', type: 'urgent' },
-      ];
-  
-      wrapper = mount(<Notifications displayDrawer={true} listNotifications={listNotifications} />);
-      const shouldUpdate = wrapper.instance().shouldComponentUpdate({ listNotifications, displayDrawer: true});
-      expect(shouldUpdate).toBe(false);
-    });
-  
-    it('should rerender with a longer list of notifications', () => {
-      const listNotifications = [
-        { id: 1, value: 'New course available', type: 'default' },
-        { id: 2, value: 'New resume available', type: 'urgent' },
-      ];
-  
-      const newListNotifications = [
-        ...listNotifications,
-        { id: 3, value: 'New data available', type: 'urgent' },
-      ];
-  
-      wrapper = mount(<Notifications displayDrawer={true} listNotifications={listNotifications} />);
-      const shouldUpdate = wrapper.instance().shouldComponentUpdate({ listNotifications: newListNotifications });
-      expect(shouldUpdate).toBe(true);
-    });
-  });
-
   it('calls handleDisplayDrawer when clicking on the menuItem', () => {
     const handleDisplayDrawerMock = jest.fn();
     wrapper = shallow(
@@ -122,5 +83,23 @@ describe('Notifications', () => {
 
     wrapper.find('button').simulate('click');
     expect(handleHideDrawerMock).toHaveBeenCalled();
+  });
+
+  it('calls markNotificationAsRead with the correct id when a notification is clicked', () => {
+    const markNotificationAsReadSpy = jest.fn();
+    const listNotifications = [
+      { id: 1, type: 'default', value: 'Notification 1' },
+      { id: 2, type: 'urgent', value: 'Notification 2' },
+    ];
+    const wrapper = mount(
+      <Notifications
+        displayDrawer={true}
+        listNotifications={listNotifications}
+        markNotificationAsRead={markNotificationAsReadSpy}
+      />
+    );
+
+    wrapper.find('li').first().simulate('click');
+    expect(markNotificationAsReadSpy).toHaveBeenCalledWith(1);
   });
 });

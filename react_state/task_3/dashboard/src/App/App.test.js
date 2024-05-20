@@ -101,4 +101,17 @@ describe('App', () => {
       isLoggedIn: false,
     });
   });
+
+  it('calls markNotificationAsRead and updates the state correctly', () => {
+    const wrapper = shallow(<App />);
+    const instance = wrapper.instance();
+    const initialNotifications = wrapper.state().listNotifications;
+    const notificationId = initialNotifications[0].id;
+
+    instance.markNotificationAsRead(notificationId);
+
+    const updatedNotifications = wrapper.state().listNotifications;
+    expect(updatedNotifications.length).toEqual(initialNotifications.length - 1);
+    expect(updatedNotifications.some((notification) => notification.id === notificationId)).toBe(false);
+  });
 });

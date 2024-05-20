@@ -44,12 +44,14 @@ class App extends React.Component {
       displayDrawer: false,
       user: defaultUser,
       logOut: defaultLogOut,
+      listNotifications: listNotifications,
     };
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
     this.handleHideDrawer = this.handleHideDrawer.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
+    this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
   }
 
   handleDisplayDrawer() {
@@ -95,8 +97,13 @@ class App extends React.Component {
     });
   }
 
+  markNotificationAsRead(id) {
+    const updateNotifications = this.state.listNotifications.filter((notification) => notification.id !== id);
+    this.setState({ listNotifications: updateNotifications });
+  }
+
   render() {
-    const { user, logOut, displayDrawer } = this.state;
+    const { user, logOut, displayDrawer, listNotifications } = this.state;
 
     return (
       <AppContext.Provider value={{ user: this.state.user, logOut: this.logOut }}>
@@ -106,6 +113,7 @@ class App extends React.Component {
             handleDisplayDrawer={this.handleDisplayDrawer}
             handleHideDrawer={this.handleHideDrawer}
             listNotifications={listNotifications}
+            markNotificationAsRead={this.markNotificationAsRead}
           />
           <div>
             <Header />
