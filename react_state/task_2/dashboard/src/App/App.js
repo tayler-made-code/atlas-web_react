@@ -9,7 +9,7 @@ import { getLatestNotification } from '../utils/utils';
 import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
 import BodySection from '../BodySection/BodySection';
 import { css, StyleSheet } from 'aphrodite';
-import AppContext from './AppContext';
+import { AppContext, defaultUser, defaultLogOut } from './AppContext';
 
 const listCourses = [
   { id: 1, name: 'ES6', credit: 60 },

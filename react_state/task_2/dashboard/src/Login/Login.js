@@ -55,7 +55,7 @@ function Login({ logIn }) {
   const handleChangePassword = (e) => {
     setPassword(e.target.value);
     setEnableSubmit(e.target.value.trim() !== '' && email.trim() !== '');
-  }
+  };
 
   return (
     <Fragment>
