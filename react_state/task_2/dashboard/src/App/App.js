@@ -87,7 +87,11 @@ class App extends React.Component {
 
   logOut() {
     this.setState({
-      user: defaultUser,
+      user: {
+        email: '',
+        password: '',
+        isLoggedIn: false,
+      }
     });
   }
 
@@ -95,7 +99,7 @@ class App extends React.Component {
     const { user, logOut, displayDrawer } = this.state;
 
     return (
-      <AppContext.Provider value={{ user, logOut }}>
+      <AppContext.Provider value={{ user: this.state.user, logOut: this.logOut }}>
         <React.Fragment>
           <Notifications
             displayDrawer={displayDrawer}

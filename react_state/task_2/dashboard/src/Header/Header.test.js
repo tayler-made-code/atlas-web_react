@@ -8,11 +8,23 @@ StyleSheetTestUtils.suppressStyleInjection();
 
 describe('Header Component', () => {
   it('renders without crashing', () => {
-    shallow(<Header />);
+    const defaultUser = { isLoggedIn: false };
+    const context = { user: defaultUser, logOut: jest.fn() };
+    shallow(
+      <AppContext.Provider value={context}>
+        <Header />
+      </AppContext.Provider>
+    );
   });
 
   it('renders img and h1 tags', () => {
-    const wrapper = shallow(<Header />);
+    const defaultUser = { isLoggedIn: false };
+    const context = { user: defaultUser, logOut: jest.fn() };
+    const wrapper = mount(
+      <AppContext.Provider value={context}>
+        <Header />
+      </AppContext.Provider>
+    );
     expect(wrapper.find('img')).toHaveLength(1);
     expect(wrapper.find('h1')).toHaveLength(1);
   });
