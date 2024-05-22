@@ -16,8 +16,16 @@ const notification = new schema.Entity('notifications', {
 
 export const normalizedData = normalize(notificationsData.default, [notification]);
 
-export function getAllNotificationsByUser(userID) {
-  return notificationsData.default
-    .filter((notification) => notification.author.id === userID)
-    .map((notification) => notification.context);
+export function getAllNotificationsByUser(userId) {
+  const userNotifications = [];
+
+  for (const notificationId of normalizedData.result) {
+    const notification = normalizedData.entities.notifications[notificationId];
+    if (notification.author === userId) {
+      const context = normalizedData.entities.messages[notification.context];
+      userNotifications.push(context);
+    }
+  }
+
+  return userNotifications;
 }
