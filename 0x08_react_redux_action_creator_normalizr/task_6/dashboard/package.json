@@ -35,7 +35,8 @@
   "dependencies": {
     "normalizr": "^3.6.2",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "redux": "^5.0.1"
   },
   "jest": {
     "testEnvironment": "jsdom",
