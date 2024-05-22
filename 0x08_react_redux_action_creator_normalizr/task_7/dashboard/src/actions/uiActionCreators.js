@@ -1,4 +1,3 @@
-import fetch from 'cross-fetch';
 import { bindActionCreators } from "redux";
 import {LOGIN, LOGOUT, DISPLAY_NOTIFICATION_DRAWER, HIDE_NOTIFICATION_DRAWER, LOGIN_SUCCESS, LOGIN_FAILURE} from './uiActionTypes';
 
@@ -42,7 +41,7 @@ export const loginRequest = (email, password) => {
   return async (dispatch) => {
     dispatch(login(email, password));
     try {
-      const response = await fetch('../../dist/login-success.json');
+      const response = await fetch('/login-success.json');
       if (response.ok) {
         dispatch(loginSuccess());
       } else {
