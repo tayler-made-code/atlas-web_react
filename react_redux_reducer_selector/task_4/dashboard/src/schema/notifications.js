@@ -16,6 +16,10 @@ const notification = new schema.Entity('notifications', {
 
 export const normalizedData = normalize(notificationsData.default, [notification]);
 
+export function notificationsNormalizer(data) {
+  return normalize(data, [notification]);
+}
+
 export function getAllNotificationsByUser(userId) {
   const userNotifications = [];
 
