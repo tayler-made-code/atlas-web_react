@@ -30,20 +30,22 @@
     "jest-environment-jsdom": "^29.7.0",
     "jest-fetch-mock": "^3.0.3",
     "prop-types": "^15.8.1",
+    "redux-mock-store": "^1.5.4",
     "style-loader": "^4.0.0",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.4"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.2.5",
     "fetch-mock": "^9.11.0",
     "immutable": "^4.3.6",
     "node-fetch": "^3.3.2",
     "normalizr": "^3.6.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-redux": "^9.1.2",
     "redux": "^5.0.1",
-    "redux-mock-store": "^1.5.4",
     "redux-thunk": "^3.1.0",
     "reselect": "^5.1.1"
   },

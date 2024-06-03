@@ -10,6 +10,8 @@ import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBot
 import BodySection from '../BodySection/BodySection';
 import { css, StyleSheet } from 'aphrodite';
 import { AppContext, defaultUser, defaultLogOut } from './AppContext';
+import { connect } from 'react-redux';
+import { fromJS } from 'immutable';
 
 const listCourses = [
   { id: 1, name: 'ES6', credit: 60 },
@@ -152,4 +154,10 @@ App.defaultProps = {
   logOut: () => {},
 };
 
-export default App;
+export const mapStateToProps = (state) => {
+  return {
+    isLoggedIn: state.ui.isUserLoggedIn,
+  };
+};
+
+export default connect(mapStateToProps)(App);
