@@ -7,10 +7,25 @@ import { StyleSheetTestUtils } from 'aphrodite';
 import { fromJS } from 'immutable';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
+import { mapStateToProps } from './App';
 
 StyleSheetTestUtils.suppressStyleInjection();
 
 const mockStore = configureStore([]);
+
+describe('mapStateToProps', () => {
+  it('should return the right object when passing the state', () => {
+    let state = {
+      ui: fromJS({
+        isUserLoggedIn: true,
+        isNotificationDrawerVisible: false,
+      }),
+    };
+
+    const result = mapStateToProps(state);
+    expect(result).toEqual({ isLoggedIn: true, displayDrawer: false });
+  });
+});
 
 describe('App', () => {
   let store;
