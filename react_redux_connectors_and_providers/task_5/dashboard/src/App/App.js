@@ -5,7 +5,6 @@ import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
 import CourseList from '../CourseList/CourseList';
 import Notifications from '../Notifications/Notifications';
-import { getLatestNotification } from '../utils/utils';
 import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
 import BodySection from '../BodySection/BodySection';
 import { css, StyleSheet } from 'aphrodite';
@@ -19,12 +18,6 @@ const listCourses = [
   { id: 1, name: 'ES6', credit: 60 },
   { id: 2, name: 'Webpack', credit: 20 },
   { id: 3, name: 'React', credit: 40 },
-];
-
-const listNotifications = [
-  { id: 1, value: 'New course available', type: 'default' },
-  { id: 2, value: 'New resume available', type: 'urgent' },
-  { id: 3, html: { __html: getLatestNotification() }, type: 'urgent' },
 ];
 
 const styles = StyleSheet.create({
@@ -53,12 +46,10 @@ class App extends React.Component {
     this.state = {
       user: defaultUser,
       logOut: defaultLogOut,
-      listNotifications: listNotifications,
     };
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
-    this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
   }
 
   componentDidMount() {
@@ -76,11 +67,6 @@ class App extends React.Component {
     }
   }
 
-  markNotificationAsRead(id) {
-    const updateNotifications = this.state.listNotifications.filter((notification) => notification.id !== id);
-    this.setState({ listNotifications: updateNotifications });
-  }
-
   render() {
     const { listNotifications } = this.state;
     const { isLoggedIn, displayDrawer, displayNotificationDrawer, hideNotificationDrawer, login } = this.props;
@@ -92,8 +78,6 @@ class App extends React.Component {
             displayDrawer={displayDrawer}
             handleDisplayDrawer={displayNotificationDrawer}
             handleHideDrawer={hideNotificationDrawer}
-            listNotifications={listNotifications}
-            markNotificationAsRead={this.markNotificationAsRead}
           />
           <div>
             <Header />
