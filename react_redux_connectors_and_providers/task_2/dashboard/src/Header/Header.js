@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import logo from '../assets/holberton_logo.jpg';
 import { StyleSheet, css } from 'aphrodite';
 import { AppContext } from '../App/AppContext';
+import { connect } from 'react-redux';
+import { logout } from '../actions/uiActionCreators';
 
 const styles = StyleSheet.create({
   header: {
@@ -22,17 +24,23 @@ const styles = StyleSheet.create({
   },
 });
 
-class Header extends Component {
-  static contextType = AppContext;
+const mapStateToProps = (state) => ({
+  user:state.ui.user,
+});
 
+const mapDispatchToProps = {
+  logout,
+};
+
+class Header extends Component {
   render() {
-    const { user, logOut } = this.context;
+    const { user, logOut } = this.props;
 
     return (
       <header className={css(styles.header)}>
         <img src={logo} className={css(styles.logo)} alt="logo" />
         <h1 className={css(styles.title)}>School dashboard</h1>
-        {user.isLoggedIn && (
+        {user && user.isLoggedIn && (
           <div id="logoutSection" className={css(styles.logoutSection)}>
             Welcome {user.email} (<a href="#" onClick={logOut}>logout</a>)
           </div>
@@ -42,4 +50,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -32,4 +32,27 @@ describe('uiReducer', () => {
     const state = uiReducer(initialState, { type: DISPLAY_NOTIFICATION_DRAWER });
     expect(state.get('isNotificationDrawerVisible')).toEqual(true);
   });
+
+  it('should set isUserLoggedIn to true and user when LOGIN_SUCCESS is passed', () => {
+    const initialState = Map({
+      isNotificationDrawerVisible: false,
+      isUserLoggedIn: false,
+      user: null,
+    });
+    const user = { email: 'user@example.com' };
+    const state = uiReducer(initialState, { type: LOGIN_SUCCESS, user });
+    expect(state.get('isUserLoggedIn')).toEqual(true);
+    expect(state.get('user')).toEqual(user);
+  });
+
+  it('should set isUserLoggedIn to false and user to null when LOGOUT is passed', () => {
+    const initialState = Map({
+      isNotificationDrawerVisible: false,
+      isUserLoggedIn: true,
+      user: { email: 'user@example.com' },
+    });
+    const state = uiReducer(initialState, { type: LOGOUT });
+    expect(state.get('isUserLoggedIn')).toEqual(false);
+    expect(state.get('user')).toBeNull();
+  });
 });

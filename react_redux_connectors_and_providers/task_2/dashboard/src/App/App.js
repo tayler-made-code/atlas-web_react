@@ -13,6 +13,7 @@ import { AppContext, defaultUser, defaultLogOut } from './AppContext';
 import { connect } from 'react-redux';
 import { fromJS } from 'immutable';
 import { displayNotificationDrawer, hideNotificationDrawer } from '../actions/uiActionCreators';
+import { loginRequest } from '../actions/uiActionCreators';
 
 const listCourses = [
   { id: 1, name: 'ES6', credit: 60 },
@@ -43,6 +44,7 @@ const styles = StyleSheet.create({
 const mapDispatchToProps = {
   displayNotificationDrawer,
   hideNotificationDrawer,
+  login: loginRequest,
 };
 
 class App extends React.Component {
@@ -74,34 +76,14 @@ class App extends React.Component {
     }
   }
 
-  logIn(email, password) {
-    this.setState({
-      user: {
-        email,
-        password,
-        isLoggedIn: true,
-      },
-    });
-  }
-
-  logOut() {
-    this.setState({
-      user: {
-        email: '',
-        password: '',
-        isLoggedIn: false,
-      }
-    });
-  }
-
   markNotificationAsRead(id) {
     const updateNotifications = this.state.listNotifications.filter((notification) => notification.id !== id);
     this.setState({ listNotifications: updateNotifications });
   }
 
   render() {
-    const { user, logOut, listNotifications } = this.state;
-    const { isLoggedIn, displayDrawer, displayNotificationDrawer, hideNotificationDrawer } = this.props;
+    const { listNotifications } = this.state;
+    const { isLoggedIn, displayDrawer, displayNotificationDrawer, hideNotificationDrawer, login } = this.props;
 
     return (
       <AppContext.Provider value={{ user: this.state.user, logOut: this.logOut }}>
@@ -122,7 +104,7 @@ class App extends React.Component {
               </BodySectionWithMarginBottom>
             ) : (
               <BodySectionWithMarginBottom className={css(styles.body)} title="Log in to continue">
-                <Login logIn={this.logIn} />
+                <Login logIn={this.login} />
               </BodySectionWithMarginBottom>
             )}
             <BodySection className={css(styles.body)} title="News from the School">

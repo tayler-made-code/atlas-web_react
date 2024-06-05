@@ -1,11 +1,10 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import Footer from './Footer';
-import { AppContext } from '../App/AppContext';
 
 describe('Footer Component', () => {
   it('renders without crashing', () => {
-    shallow(<AppContext.Provider value={{ user: { isLoggedIn: false } }}><Footer /></AppContext.Provider>);
+    shallow(<Footer />);
   });
 
   it('renders the text "Copyright"', () => {
@@ -14,13 +13,12 @@ describe('Footer Component', () => {
   });
 
   it('does not display the link when the user is logged out', () => {
-    const wrapper = shallow(<AppContext.Provider value={{ user: { isLoggedIn: false } }}><Footer /></AppContext.Provider>);
+    const wrapper = shallow(<Footer user={{ isLoggedIn: false }} />);
     expect(wrapper.text().includes('Contact us')).toBe(false);
   });
 
   it('displays the link when the user is logged in', () => {
-    const loggedInUser = { email: 'user@email.com', isLoggedIn: true };
-    const wrapper = mount(<AppContext.Provider value={{ user: loggedInUser }}><Footer /></AppContext.Provider>);
+    const wrapper = shallow(<Footer user={{ isLoggedIn: true }} />);
     expect(wrapper.text().includes('Contact us')).toBe(true);
   });
 });
