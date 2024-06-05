@@ -30,6 +30,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "jest-fetch-mock": "^3.0.3",
     "prop-types": "^15.8.1",
+    "redux-devtools-extension": "^2.13.9",
     "redux-mock-store": "^1.5.4",
     "style-loader": "^4.0.0",
     "webpack": "^5.91.0",

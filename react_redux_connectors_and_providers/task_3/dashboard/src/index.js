@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom/client';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import App from './App/App';
-import uiReducer from './reducers/uiReducer';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers'
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 const store = configureStore({
   reducer: rootReducer,
   middleware: [thunk],
+  devTools: composeWithDevTools(),
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
